@@ -73,7 +73,7 @@ export default function Home() {
         />
       </div>
       <input ref={inputRef} type="text" placeholder="상품 명"></input>
-      <button onClick={handleClick}>상품 추가</button>
+      <button onClick={handleClick}>상품 추가123</button>
       <div>
         <p>상품 리스트</p>
         {products &&
