@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import { useEffect, useRef, useState } from 'react'
+import { css } from '@emotion/react'
 import Button from '@components/Button'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -16,7 +17,7 @@ export default function Home() {
   // }, [])
 
   const [products, setProducts] =
-    useState<{ id: string; name: string; createdAt: string }[]>()
+    useState<{ id: string; name: string; createAt: string }[]>()
 
   useEffect(() => {
     fetch('/api/get-products')
@@ -72,15 +73,22 @@ export default function Home() {
           priority
         />
       </div>
-      <input ref={inputRef} type="text" placeholder="상품 명"></input>
-      <button onClick={handleClick}>상품 추가</button>
+      <input
+        className="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
+        type="text"
+        name="search"
+        ref={inputRef}
+        placeholder="상품 명"
+      ></input>
+
+      <Button onClick={handleClick}>상품 추가</Button>
       <div>
         <p>상품 리스트</p>
         {products &&
           products.map((item) => (
             <div key={item.id}>
               {item.name}
-              <span>{item.createdAt}</span>
+              <span>{item.createAt}</span>
             </div>
           ))}
 
