@@ -5,25 +5,9 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-async function getProducts(skip: number, take: number, category: number) {
-  const where =
-    category && category !== -1
-      ? {
-          where: {
-            category_id: category,
-          },
-        }
-      : undefined
-
+async function getCategories() {
   try {
-    const response = await prisma.products.findMany({
-      skip: skip,
-      take: take,
-      ...where,
-      orderBy: {
-        price: 'asc',
-      },
-    })
+    const response = await prisma.categories.findMany({})
     console.log(response + 'asdfads')
     return response
   } catch (error) {
@@ -39,18 +23,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const { skip, take, category } = req.query
-
-  if (skip == null || take == null) {
-    res.status(400).json({ message: 'skip 혹은 take가 없습니다.' })
-    return
-  }
   try {
-    const products = await getProducts(
-      Number(skip),
-      Number(take),
-      Number(category)
-    )
+    const products = await getCategories()
     console.log(products)
     res.status(200).json({ items: products, message: `Success Products List` })
   } catch (error) {

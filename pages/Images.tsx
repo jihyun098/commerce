@@ -2,6 +2,7 @@ import ImageGallery from 'react-image-gallery'
 import React from 'react'
 import Carousel from 'nuka-carousel'
 import Image from 'next/image'
+import Head from 'next/head'
 const images = [
   {
     original: 'https://picsum.photos/id/1018/1000/600/',
@@ -40,7 +41,7 @@ const images2 = [
   },
 ]
 
-export default function Products() {
+export default function Images() {
   return (
     <>
       <ImageGallery items={images}></ImageGallery>
