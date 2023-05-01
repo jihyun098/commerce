@@ -30,3 +30,9 @@ model products {
   @@index([category_id])
 }
 
+model user {
+  id String @id @default(cuid())
+  name String?
+  email String? @unique
+  image String?
+}
